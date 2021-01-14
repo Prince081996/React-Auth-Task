@@ -1,0 +1,8 @@
+{
+    "domain": "dev-iwpccrbe.us.auth0.com",
+    "clientId": "ie0xm8X5x4MQnIu1aLOhLSvVz4tIRvYE",
+    "callbackUrl": "http://localhost:3000",
+    "realm": "demo-db",
+    "apiAudience": "https://dev-iwpccrbe.us.auth0.com/api/v2/",
+    "scope":"openid read:current_user update:current_user_metadata"
+  }
