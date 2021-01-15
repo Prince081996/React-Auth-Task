@@ -16,6 +16,7 @@ export default function Profile(props){
         if (err){
           console.log(err)
         } if (user) {
+          console.log(user)
          setUser(user)
         }
     })

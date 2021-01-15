@@ -11,12 +11,11 @@ export default function Routes(){
     return(
 
     <Switch>
-    <Route path='/signup' exact component={SignupForm}  />
-    <Route path='/login' component={LoginForm}  />
-    <Route path='/profile' component={Profile} history={history} />
+    <Route path='/signup' component={SignupForm} history={history}  />
+    <Route path='/login' component={LoginForm} history={history} />
+    <PrivateRoute path='/' component={Profile} exact={true}/>
     <Route path='/not-found' exact component={NotFound}  />
     <Redirect to='/not-found' />
-    <PrivateRoute path='/' component={Profile} exact={true}/>
     </Switch>
     );
 }

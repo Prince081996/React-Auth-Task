@@ -1,7 +1,8 @@
-import {Card, CardBody, CardText, CardTitle,Row, Col,Input, Button, Container,Jumbotron,Label } from "reactstrap";
+import {Card, CardBody, CardText, CardTitle,Row, Col,Input, Button, Container,Jumbotron,Label, Spinner } from "reactstrap";
 import { auth0Client } from './auth-client';
 import {useState} from 'react'
 import './SignUp.css'
+import { Link } from "react-router-dom";
 
 export default function SignupForm(){
     const [firstName, setFirstName] = useState('');
@@ -10,28 +11,23 @@ export default function SignupForm(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [sending, setSending] = useState(false);
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState('');
 
     const handleSignUp = e=> {
-        e.preventDefault();
-        let hasError=false;
-       const errors={};
+      setSending(true)
+      let hasError=false;
+       let errors="";
        if(!email){
-         errors.email='Please fill in';
+         errors+='Please fill Email ';
          hasError=true
        }
        if(!password){
-         errors.password="Password is required"
+         errors+=" Password is required"
          hasError=true;
        }
        setErrors(errors);
        if(errors){
-        const errorElementId=Object.keys(errors)[0];
-        const element=document.getElementById(errorElementId);
-        if(element){ 
-          element.scrollIntoView({block:'center',behavior:'smooth',inline:'center'})
-          element.focus()
-        }
+        setErrors(errors)
       }
       console.log(hasError)
        if(hasError){
@@ -64,55 +60,58 @@ export default function SignupForm(){
           <Col lg="8">
             <Jumbotron>
               <h3>
-                <u>SignUp Form</u>
+                <u>SignUp</u>
               </h3>
-            <Card>
-          
+            <Card>         
                 <CardBody>
                     <CardTitle className="title">
-                        Please Fill Your Details
+                        Please Fill Your Details!
                     </CardTitle>
                     <CardText tag="div">
                    <div className="form-group">
+                     {errors && <p style={{color:'red'}}>{errors}</p>}
                     <Row>
                 <Col>
                 <Label>FirstName</Label>
-                <Input value={firstName}  onChange={(e) => {setFirstName(e.target.value);}} type="text" placeholder="FirstName" />
+                <Input value={firstName} data-testid="firstname-id"    onChange={(e) => {setFirstName(e.target.value);}} type="text" placeholder="FirstName" />
                 </Col>
             </Row>
                   </div>
             <Row>
                 <Col>
                 <Label>LastName</Label>
-                <Input value={lastName} onChange={(e) => {setLastName(e.target.value)}}type="text" placeholder="LastName" />
+                <Input value={lastName} data-testid="lasttname-id"  onChange={(e) => {setLastName(e.target.value)}} type="text" placeholder="LastName" />
                 </Col>
             </Row>
             <Row>
                 <Col>
                 <Label>UserName</Label>
-                <Input value={userName} onChange={(e) => {setuserName(e.target.value)}}type="text" placeholder="UserName" />
+                <Input value={userName} data-testid="username-id"  onChange={(e) => {setuserName(e.target.value)}}type="text" placeholder="UserName" />
                 </Col>
             </Row>
             <Row>
                 <Col>
                 <Label>Email</Label>
-                <Input value={email}  onChange={(e) => {setEmail(e.target.value);}} type="email" placeholder="Email" />
+                <Input value={email} data-testid="email-id" onChange={(e) => {setEmail(e.target.value);}} type="email" placeholder="Email" />
                 </Col>
             </Row>
             <Row>
                 <Col>
                 <Label>Password</Label>
-                <Input value={password} onChange={(e) => {setPassword(e.target.value)}}type="password" placeholder="Password" />
+                <Input value={password} data-testid="pwd-id"  onChange={(e) => {setPassword(e.target.value)}}type="password" placeholder="Password" />
                 </Col>
             </Row>
+            {sending && <Spinner color="primary" />}
             <Row>   
                 <Col >
-                <Button color="primary" onClick={handleSignUp}>SignUp</Button>
+                <p></p>
+                <Link to='/login'><Button color="primary" data-testid="signup_id"  onClick={handleSignUp}>SignUp</Button></Link>
                 </Col>
                     </Row>
                     <Row>   
                 <Col >
-                <Button color="primary" onClick={handleSignUp}>Login</Button>
+                <p>Already Registered Click On Login</p>
+                <Link to='/login'><Button>Login</Button></Link>
                 </Col>
                     </Row>
                     </CardText>

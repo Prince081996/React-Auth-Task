@@ -1,4 +1,4 @@
-import {Button,  Input, Card, CardBody, CardTitle, CardText, Row, Col} from 'reactstrap';
+import {Button,  Input, Card, CardBody, CardTitle, CardText, Row, Col, Label} from 'reactstrap';
 import {useState} from 'react';
 
 
@@ -75,17 +75,19 @@ return(
         <CardText tag="div">
             <Row>
                 <Col>
-                <Input value={email}  onChange={(e) => {setEmail(e.target.value);}} type="email" placeholder="Email" />
+                <Label>Email</Label>
+                <Input value={email} data-testid="email-id"  onChange={(e) => {setEmail(e.target.value);}} type="email" placeholder="Email" />
                 </Col>
             </Row>
             <Row>
                 <Col>
-                <Input value={password} onChange={(e) => {setPassword(e.target.value)}}type="password" placeholder="Password" />
+                <Label>Password</Label>
+                <Input value={password} data-testid="pwd-id"  onChange={(e) => {setPassword(e.target.value)}} type="password" placeholder="Password" />
                 </Col>
             </Row>
             <Row>   
                 <Col>
-                <Button color="primary" onClick={onSubmitHandler}>Login</Button>
+                <Button color="primary" data-testid="login-id" onClick={onSubmitHandler}>Submit</Button>
                 </Col>
             </Row>
         </CardText>
